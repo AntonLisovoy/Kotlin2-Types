@@ -30,6 +30,11 @@ class ErrorLogger<in E : Throwable> {
             println("Error at $date: ${error.message}")
         }
     }
+
+    @Suppress("UNCHECKED_CAST")
+    fun dump(): List<Pair<LocalDateTime, @UnsafeVariance E>> {
+        return errors as List<Pair<LocalDateTime, E>>
+    }
 }
 
 fun processThrowables(logger: ErrorLogger<Throwable>) {
